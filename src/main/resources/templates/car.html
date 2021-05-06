@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>车辆信息页面</title>
+    <script type="text/javascript" src="../static/js/jquery-2.1.1.js"></script>
+</head>
+<body>
+<!-- carNum,carFrame,carEng,carDate,carValue -->
+
+<div class="col-md-8"
+     style="background: #fff; padding: 40px 80px; margin: 30px; border: 7px solid #ccc;">
+    <h1>车辆信息页面<</h1>
+    <form id="myform" class="form-horizontal" method="post" style="margin-top: 5px;">
+        <div class="form-group">
+            <label id="username" class="col-sm-2 control-label">车牌号码</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="carNum" name="carNum"
+                       placeholder="请输入车牌号码">
+            </div>
+        </div>
+        <div class="form-group">
+            <label id="inputPassword3" class="col-sm-2 control-label">车架号</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="carFrame" name="carFrame"
+                       placeholder="请输入车架号">
+            </div>
+        </div>
+        <div class="form-group">
+            <label id="confirmpwd" class="col-sm-2 control-label">发动号</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="carEng" name="carEng"
+                       placeholder="请输入发动号">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label id="date" class="col-sm-2 control-label">初登日期</label>
+            <div class="col-sm-6">
+                <input type="date" class="form-control" id="carDate" name="carDate">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="date" class="col-sm-2 control-label">购车价值</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="carValue" name="carValue"
+                       placeholder="请输入购车价值">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+
+                <a href="javascript:;" onclick="FormSubmit()">下一步</a>
+                <!--<input type="button" value="下一步" id="send"> -->
+            </div>
+        </div>
+    </form>
+</div>
+<!-- carNum,carFrame,carEng,carDate,carValue -->
+<script type="text/javascript">
+
+    function FormSubmit() {
+        const jsonData = {};
+        jsonData.carNum = $("#carNum").val();
+        jsonData.carFrame = $("#carFrame").val();
+
+        // sessionStorage.setItem('info', JSON.stringify(jsonData));
+        //alert( JSON.stringify(jsonData) );
+        // window.location.href = '/fulan/static/html/insurance.html';
+    }
+
+    $.ajax({
+        url: "/ajax",
+        async: true,
+        type: "post",
+        data: jsonData,
+        success: function (data) {
+            alert("请求成功");
+        },
+        error: function () {
+            alert("请求失败");
+        },
+        dataType: "json"
+    });
+
+    /* ajaxJson(
+            '/fulan/insertcar',
+            jsonData,
+            function(data){
+                alert(JSON.stringify(data));
+            },
+            "POST",
+            function(){},
+            false
+     );
+} */
+
+    /* function ajaxJson(url, reqData, successcallBack, type, failcallBack, async) {
+        var isAsync = async || true;
+        var sendType = type || 'POST';
+
+        var _settings = {};
+        _settings.async = isAsync;
+        _settings.cache = false;
+        _settings.type = sendType;
+        if (sendType !== "post") {
+            _settings.contentType = "application/json; charset=UTF-8";
+        } else {
+            _settings.contentType = "application/x-www-form-urlencoded; charset=UTF-8";
+        }
+        _settings.dataType = "json"
+        if (reqData != null || reqData != undefined) {
+            _settings.data = JSON.stringify(reqData);
+        }
+    <!--     成功回调 -->
+        _settings.success = function (res, status, xhr) {
+
+            if (res != undefined && res != "") {
+                if (successcallBack != null || successcallBack != undefined) {
+                    successcallBack(res);
+                }
+                else {
+                    alert(JSON.stringify(res));
+                }
+            }
+            else {
+                if (failcallBack != null || failcallBack != undefined) {
+                    failcallBack(res);
+                }
+                else {
+                    alert(JSON.stringify(res));
+                }
+            }
+        }
+     <!--    失败回调 -->
+        _settings.error = function (res) {
+            alert(JSON.stringify(res));
+        }
+        $.ajax(url, _settings);
+    } */
+</script>
+</body>
+</html>

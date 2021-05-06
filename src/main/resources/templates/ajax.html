@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查询用户</title>
+</head>
+<script>
+    function query() {
+
+        $.ajax({
+            url:"/index",
+            type:"post",
+            data:{
+                id:$("#userId").val(),
+            },
+            success:function(data){
+                console.log(data);
+                $("#username").val(data.username);
+            }
+        })
+    }
+</script>
+<body>
+<div id="app">
+    <form action="/index" method="post">
+        请输入ID：<input type="text" name="id" id="userId"/>
+        <input type="button" value="查询"  onclick="query()" />
+        您的用户名是：<input type="text" name="username" id="username"/>
+
+    </form>
+</div>
+</body>
+</html>

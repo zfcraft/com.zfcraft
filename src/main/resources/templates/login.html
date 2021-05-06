@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- JS -->
+    <!--<script type="text/javascript" th:src="@{/static/easyui/jquery.min.js}"></script>-->
+    <script type="text/javascript" th:src="@{/js/jquery-2.1.1.js}"></script>
+
+</head>
+<script type="text/javascript">
+    function fn3(){
+
+        var jsonData = {};
+        jsonData.name=$("#userName").val();
+        var data = JSON.stringify(jsonData);
+        $.ajax({
+            url:"/ajax",
+            async:true,
+            type:"POST",
+            data:data,
+            contentType:"application/json",
+            success:function(data){
+                alert(data.name);
+            },
+            error:function(){
+                alert("请求失败");
+            },
+            dataType:"json"
+        });
+
+    }
+    // $.ajax({
+    //     url:"ajaxServlet1111" , // 请求路径
+    //     type:"POST" , //请求方式
+    //     //data: "username=jack&age=23",//请求参数
+    //     data:{"username":"jack","age":23},
+    //     success:function (data) {
+    //         alert(data);
+    //     },//响应成功后的回调函数
+    //     error:function () {
+    //         alert("出错啦...")
+    //     },//表示如果请求响应出现错误，会执行的回调函数
+    //
+    //     dataType:"text"//设置接受到的响应数据的格式
+    // });
+</script>
+<body>
+<input class="form-control" id="userName" type="text" th:value="${userName}" name="userName"><br>
+<input id="btn" type="button" value="ajax访问服务器端" onclick="fn3()">
+<br>
+
+
+</body>
+</html>
